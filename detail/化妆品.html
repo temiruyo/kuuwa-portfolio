@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { width: 750px; margin: 0 auto; overflow-x: hidden; font-family: 'PingFang SC', 'Microsoft YaHei', sans-serif; background: #faf9f7; }
+
+/* ===== 通用模块 ===== */
+.section { width: 750px; position: relative; overflow: hidden; }
+
+/* 模块分隔线 */
+.section-divider {
+  width: 750px; height: 1px;
+  background: linear-gradient(90deg, transparent 10%, rgba(180,165,140,0.2) 30%, rgba(180,165,140,0.2) 70%, transparent 90%);
+}
+
+/* ===== 模块1: 品牌Hero ===== */
+.hero {
+  height: 680px;
+  background:
+    radial-gradient(ellipse 600px 500px at 50% 30%, rgba(50,42,32,0.95) 0%, transparent 70%),
+    radial-gradient(ellipse 400px 350px at 30% 70%, rgba(60,50,38,0.4) 0%, transparent 60%),
+    linear-gradient(180deg, #1a1510 0%, #0f0c08 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.hero-glow {
+  position: absolute;
+  top: 20%; left: 50%;
+  transform: translateX(-50%);
+  width: 400px; height: 300px;
+  background: radial-gradient(ellipse, rgba(180,150,100,0.08) 0%, transparent 70%);
+  filter: blur(40px);
+}
+
+.hero-tag {
+  padding: 6px 20px;
+  border: 1px solid rgba(180,150,100,0.3);
+  font-size: 11px;
+  color: #b8965a;
+  letter-spacing: 6px;
+  text-transform: uppercase;
+  margin-bottom: 32px;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-title {
+  font-size: 42px;
+  font-weight: 200;
+  color: #e8dfd0;
+  letter-spacing: 8px;
+  line-height: 1.3;
+  margin-bottom: 20px;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-sub {
+  font-size: 14px;
+  color: rgba(180,165,140,0.6);
+  letter-spacing: 3px;
+  line-height: 1.8;
+  margin-bottom: 40px;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-line {
+  width: 40px; height: 1px;
+  background: rgba(180,150,100,0.4);
+  position: relative;
+  z-index: 2;
+}
+
+/* ===== 模块2: 产品展示 ===== */
+.product-showcase {
+  height: 750px;
+  background: #faf9f7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.showcase-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 500px 400px at 50% 50%, rgba(200,185,160,0.08) 0%, transparent 70%);
+}
+
+.showcase-placeholder {
+  width: 400px; height: 550px;
+  border: 2px dashed rgba(180,160,130,0.2);
+  border-radius: 12px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  color: rgba(150,135,115,0.4);
+  font-size: 14px;
+  letter-spacing: 2px;
+  z-index: 2;
+}
+
+.showcase-placeholder .icon {
+  width: 64px; height: 64px;
+  margin-bottom: 16px;
+  opacity: 0.3;
+  border: 1px solid rgba(180,160,130,0.2);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px;
+}
+
+/* ===== 模块3: 核心成分 ===== */
+.ingredients {
+  padding: 80px 60px;
+  background: #faf9f7;
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: 56px;
+}
+
+.section-tag {
+  display: inline-block;
+  padding: 4px 14px;
+  border: 1px solid rgba(140,160,145,0.35);
+  font-size: 10px;
+  color: #7a9a7e;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.section-title {
+  font-size: 28px;
+  font-weight: 300;
+  color: #3a3228;
+  letter-spacing: 4px;
+}
+
+.section-desc {
+  font-size: 13px;
+  color: #a0937f;
+  letter-spacing: 1px;
+  margin-top: 12px;
+}
+
+.ing-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+}
+
+.ing-card {
+  padding: 36px 32px;
+  background: rgba(255,255,255,0.6);
+  backdrop-filter: blur(16px);
+  border: 1px solid rgba(200,190,175,0.25);
+  border-radius: 6px;
+  position: relative;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.02);
+}
+
+.ing-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 32px;
+  width: 20px; height: 2px;
+  background: #7a9a7e;
+}
+
+.ing-icon {
+  font-size: 28px;
+  margin-bottom: 16px;
+  opacity: 0.8;
+}
+
+.ing-card-name {
+  font-size: 17px;
+  font-weight: 500;
+  color: #3a3228;
+  letter-spacing: 1px;
+  margin-bottom: 4px;
+}
+
+.ing-card-en {
+  font-size: 11px;
+  color: #a0937f;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.ing-card-desc {
+  font-size: 13px;
+  color: #8a7e6e;
+  line-height: 1.8;
+}
+
+/* ===== 模块4: 功效验证 ===== */
+.efficacy {
+  padding: 80px 60px;
+  background:
+    radial-gradient(ellipse 500px 400px at 50% 50%, rgba(200,185,160,0.06) 0%, transparent 70%),
+    #f5f2ed;
+}
+
+.efficacy-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.eff-item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.eff-label {
+  width: 100px;
+  font-size: 14px;
+  color: #5a5045;
+  letter-spacing: 1px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.eff-bar-wrap {
+  flex: 1;
+  height: 6px;
+  background: rgba(200,190,175,0.2);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.eff-bar {
+  height: 100%;
+  border-radius: 3px;
+  background: linear-gradient(90deg, #7a9a7e, #5a8a5e);
+  box-shadow: 0 0 8px rgba(90,138,94,0.15);
+}
+
+.eff-value {
+  width: 48px;
+  font-size: 16px;
+  font-weight: 400;
+  color: #5a8a5e;
+  letter-spacing: 1px;
+  text-align: left;
+  flex-shrink: 0;
+}
+
+/* ===== 模块5: 使用方法 ===== */
+.usage {
+  padding: 80px 60px;
+  background: #faf9f7;
+}
+
+.usage-steps {
+  display: flex;
+  gap: 20px;
+}
+
+.usage-step {
+  flex: 1;
+  text-align: center;
+  padding: 32px 16px;
+  position: relative;
+}
+
+.usage-step::after {
+  content: '→';
+  position: absolute;
+  right: -12px; top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  color: rgba(180,160,130,0.3);
+}
+
+.usage-step:last-child::after { content: none; }
+
+.step-num {
+  width: 36px; height: 36px;
+  margin: 0 auto 16px;
+  border: 1px solid rgba(180,160,130,0.3);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px;
+  color: #8a7e6e;
+  letter-spacing: 1px;
+}
+
+.step-icon {
+  font-size: 32px;
+  margin-bottom: 12px;
+  opacity: 0.7;
+}
+
+.step-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: #3a3228;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.step-desc {
+  font-size: 12px;
+  color: #a0937f;
+  line-height: 1.7;
+}
+
+/* ===== 模块6: 使用前后 ===== */
+.comparison {
+  padding: 80px 60px;
+  background: #f5f2ed;
+}
+
+.compare-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+
+.compare-box {
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid rgba(200,190,175,0.25);
+  background: #faf9f7;
+}
+
+.compare-img-placeholder {
+  width: 100%;
+  height: 280px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  color: rgba(150,135,115,0.4);
+  font-size: 13px;
+  letter-spacing: 1px;
+  background: rgba(0,0,0,0.01);
+}
+
+.compare-img-placeholder .icon {
+  font-size: 28px;
+  margin-bottom: 8px;
+  opacity: 0.3;
+}
+
+.compare-label {
+  padding: 16px 20px;
+  text-align: center;
+  font-size: 14px;
+  color: #5a5045;
+  letter-spacing: 2px;
+  border-top: 1px solid rgba(200,190,175,0.2);
+}
+
+/* ===== 模块7: 品质保障 ===== */
+.guarantee {
+  padding: 60px;
+  background: #faf9f7;
+}
+
+.guarantee-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.guarantee-item {
+  text-align: center;
+  padding: 28px 12px;
+  background: rgba(255,255,255,0.5);
+  border: 1px solid rgba(200,190,175,0.2);
+  border-radius: 6px;
+}
+
+.guarantee-icon {
+  font-size: 28px;
+  margin-bottom: 12px;
+  opacity: 0.7;
+}
+
+.guarantee-title {
+  font-size: 13px;
+  font-weight: 500;
+  color: #3a3228;
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+
+.guarantee-desc {
+  font-size: 11px;
+  color: #a0937f;
+  line-height: 1.6;
+}
+
+/* ===== 模块8: 产品参数 ===== */
+.params {
+  padding: 60px;
+  background: #f5f2ed;
+}
+
+.param-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.param-table tr {
+  border-bottom: 1px solid rgba(200,190,175,0.2);
+}
+
+.param-table tr:last-child { border-bottom: none; }
+
+.param-table td {
+  padding: 16px 20px;
+  font-size: 13px;
+  letter-spacing: 0.5px;
+}
+
+.param-table td:first-child {
+  color: #8a7e6e;
+  width: 140px;
+}
+
+.param-table td:last-child {
+  color: #3a3228;
+}
+
+        
+        /* ===== 手机适配 ===== */
+        @media (max-width: 600px) {
+            body { max-width: 100%; }
+            .sec { padding: 30px 16px; }
+            .sec-label { font-size: 11px; letter-spacing: 4px; }
+            .sec-title { font-size: 22px; letter-spacing: 2px; }
+            .sec-sub { font-size: 13px; letter-spacing: 1px; margin-bottom: 20px; }
+            
+            /* Hero */
+            .hero-overlay { left: 16px; right: 16px; }
+            .hero-overlay h1 { font-size: 26px; letter-spacing: 3px; }
+            .hero-overlay .brand { font-size: 11px; letter-spacing: 4px; }
+            .hero-overlay .price { font-size: 20px; }
+            
+            /* Philosophy */
+            .philosophy { flex-direction: column; gap: 20px; }
+            .philosophy .phil-text p { font-size: 15px; }
+            
+            /* Materials */
+            .material-grid { grid-template-columns: 1fr; gap: 20px; }
+            .mat-card .mat-name { font-size: 17px; }
+            .mat-card .mat-desc { font-size: 13px; }
+            
+            /* Craft */
+            .craft-row { flex-direction: column !important; gap: 12px; margin-bottom: 20px; }
+            .craft-row .craft-img { width: 100%; aspect-ratio: 16/10; }
+            .craft-row .craft-text { padding: 0; }
+            .craft-row .craft-text h4 { font-size: 18px; }
+            .craft-row .craft-text p { font-size: 14px; }
+            
+            /* Dimensions */
+            .dim-table td { padding: 12px 10px; font-size: 14px; }
+            .dim-table td:first-child { width: 90px; }
+            
+            /* Lifestyle */
+            .ls-grid { grid-template-columns: 1fr; }
+            .ls-card img { aspect-ratio: 16/10; }
+            
+            /* Service */
+            .service { padding: 30px 16px 40px; }
+            .service-items { flex-direction: column; gap: 12px; }
+            .svc-item { padding: 20px 16px; }
+            .svc-item .svc-title { font-size: 16px; }
+            .svc-item .svc-desc { font-size: 13px; }
+            .svc-note p { font-size: 13px; }
+            
+            /* Back button */
+            .back-btn { top: 12px; left: 12px; padding: 8px 14px; font-size: 13px; }
+        }
+
+</style>
+
+<style>
+.back-btn {
+    position: fixed; top: 20px; left: 20px; z-index: 9999;
+    background: rgba(255,255,255,0.9); border: none; border-radius: 24px;
+    padding: 10px 20px; font-size: 14px; color: #333; cursor: pointer;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 6px;
+    transition: all 0.2s; backdrop-filter: blur(8px);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", sans-serif;
+}
+.back-btn:hover { background: #fff; box-shadow: 0 4px 16px rgba(0,0,0,0.15); transform: translateY(-1px); }
+
+        /* ===== 手机适配 ===== */
+        @media (max-width: 520px) {
+            body { padding: 0; }
+            .hero { height: auto; min-height: 200px; padding: 40px 16px; }
+            .hero h1 { font-size: 20px; }
+            .hero p { font-size: 12px; }
+            section { padding: 24px 16px; }
+            h2 { font-size: 16px; margin-bottom: 12px; }
+            p, li { font-size: 13px; line-height: 1.7; }
+            .philosophy { grid-template-columns: 1fr; }
+            .mat-card { padding: 14px; }
+            .craft-row { flex-direction: column; }
+            .craft-row .craft-img { width: 100%; height: 180px; }
+            .dim-table td:first-child { width: 100px; font-size: 12px; }
+            .dim-table td:last-child { font-size: 12px; }
+            .ls-card { width: 48%; }
+            .svc-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+            .svc-item { padding: 14px 10px; }
+            .svc-item h4 { font-size: 13px; }
+            .svc-item p { font-size: 11px; }
+            .back-btn { top: 12px; left: 12px; padding: 8px 14px; font-size: 13px; }
+        }
+
+
+        /* ===== 手机适配 ===== */
+        @media (max-width: 600px) {
+            body { max-width: 100%; }
+            .sec { padding: 30px 16px; }
+            .sec-label { font-size: 11px; letter-spacing: 4px; }
+            .sec-title { font-size: 22px; letter-spacing: 2px; }
+            .sec-sub { font-size: 13px; letter-spacing: 1px; margin-bottom: 20px; }
+            
+            /* Hero */
+            .hero-overlay { left: 16px; right: 16px; }
+            .hero-overlay h1 { font-size: 26px; letter-spacing: 3px; }
+            .hero-overlay .brand { font-size: 11px; letter-spacing: 4px; }
+            .hero-overlay .price { font-size: 20px; }
+            
+            /* Philosophy */
+            .philosophy { flex-direction: column; gap: 20px; }
+            .philosophy .phil-text p { font-size: 15px; }
+            
+            /* Materials */
+            .material-grid { grid-template-columns: 1fr; gap: 20px; }
+            .mat-card .mat-name { font-size: 17px; }
+            .mat-card .mat-desc { font-size: 13px; }
+            
+            /* Craft */
+            .craft-row { flex-direction: column !important; gap: 12px; margin-bottom: 20px; }
+            .craft-row .craft-img { width: 100%; aspect-ratio: 16/10; }
+            .craft-row .craft-text { padding: 0; }
+            .craft-row .craft-text h4 { font-size: 18px; }
+            .craft-row .craft-text p { font-size: 14px; }
+            
+            /* Dimensions */
+            .dim-table td { padding: 12px 10px; font-size: 14px; }
+            .dim-table td:first-child { width: 90px; }
+            
+            /* Lifestyle */
+            .ls-grid { grid-template-columns: 1fr; }
+            .ls-card img { aspect-ratio: 16/10; }
+            
+            /* Service */
+            .service { padding: 30px 16px 40px; }
+            .service-items { flex-direction: column; gap: 12px; }
+            .svc-item { padding: 20px 16px; }
+            .svc-item .svc-title { font-size: 16px; }
+            .svc-item .svc-desc { font-size: 13px; }
+            .svc-note p { font-size: 13px; }
+            
+            /* Back button */
+            .back-btn { top: 12px; left: 12px; padding: 8px 14px; font-size: 13px; }
+        }
+
+</style>
+
+</head>
+<body>
+<a href="../index.html" class="back-btn" onclick="localStorage.setItem('scrollPos', history.state?.scrollPos || 0);">← 返回作品集</a>
+
+
+<!-- 模块1: 品牌Hero -->
+<div class="section hero">
+  <div class="hero-glow"></div>
+  <div class="hero-tag">Since 1987 · Paris</div>
+  <div class="hero-title">水润焕采<br>精华液</div>
+  <div class="hero-sub">Hydra-Glow Repair Serum<br>源自法国实验室的肌肤焕活方案</div>
+  <div class="hero-line"></div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- 模块2: 产品展示 -->
+<div class="section product-showcase">
+  <div class="showcase-bg"></div>
+  <div class="showcase-placeholder">
+    <div class="icon">📷</div>
+    产品实拍图<br><small>400×550px · 建议PNG透明底</small>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- 模块3: 核心成分 -->
+<div class="section ingredients">
+  <div class="section-header">
+    <div class="section-tag">Core Ingredients</div>
+    <div class="section-title">甄选成分</div>
+    <div class="section-desc">每一滴精华，都蕴含科研力量</div>
+  </div>
+  <div class="ing-grid">
+    <div class="ing-card">
+      <div class="ing-icon">💧</div>
+      <div class="ing-card-name">透明质酸钠</div>
+      <div class="ing-card-en">Sodium Hyaluronate</div>
+      <div class="ing-card-desc">三重分子量玻尿酸，由表及里层层渗透，构建立体保湿网络</div>
+    </div>
+    <div class="ing-card">
+      <div class="ing-icon">🛡️</div>
+      <div class="ing-card-name">神经酰胺 NP</div>
+      <div class="ing-card-en">Ceramide NP</div>
+      <div class="ing-card-desc">仿生脂质成分，修护受损屏障，重建肌肤天然保护层</div>
+    </div>
+    <div class="ing-card">
+      <div class="ing-icon">✨</div>
+      <div class="ing-card-name">烟酰胺</div>
+      <div class="ing-card-en">Niacinamide</div>
+      <div class="ing-card-desc">高纯度维B3，抑制黑色素转运，提亮肤色改善暗沉</div>
+    </div>
+    <div class="ing-card">
+      <div class="ing-icon">🌿</div>
+      <div class="ing-card-name">角鲨烷</div>
+      <div class="ing-card-en">Squalane</div>
+      <div class="ing-card-desc">橄榄源植物润肤剂，亲和肌肤，柔润不闷不油腻</div>
+    </div>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- 模块4: 功效验证 -->
+<div class="section efficacy">
+  <div class="section-header">
+    <div class="section-tag">Clinical Results</div>
+    <div class="section-title">功效实证</div>
+    <div class="section-desc">经第三方机构检测，28天使用周期数据</div>
+  </div>
+  <div class="efficacy-bars">
+    <div class="eff-item">
+      <div class="eff-label">即时补水</div>
+      <div class="eff-bar-wrap"><div class="eff-bar" style="width:92%"></div></div>
+      <div class="eff-value">+92%</div>
+    </div>
+    <div class="eff-item">
+      <div class="eff-label">持久锁水</div>
+      <div class="eff-bar-wrap"><div class="eff-bar" style="width:85%"></div></div>
+      <div class="eff-value">+85%</div>
+    </div>
+    <div class="eff-item">
+      <div class="eff-label">屏障修护</div>
+      <div class="eff-bar-wrap"><div class="eff-bar" style="width:78%"></div></div>
+      <div class="eff-value">+78%</div>
+    </div>
+    <div class="eff-item">
+      <div class="eff-label">肤色提亮</div>
+      <div class="eff-bar-wrap"><div class="eff-bar" style="width:71%"></div></div>
+      <div class="eff-value">+71%</div>
+    </div>
+    <div class="eff-item">
+      <div class="eff-label">细纹改善</div>
+      <div class="eff-bar-wrap"><div class="eff-bar" style="width:65%"></div></div>
+      <div class="eff-value">+65%</div>
+    </div>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- 模块5: 使用方法 -->
+<div class="section usage">
+  <div class="section-header">
+    <div class="section-tag">How To Use</div>
+    <div class="section-title">使用方法</div>
+  </div>
+  <div class="usage-steps">
+    <div class="usage-step">
+      <div class="step-num">01</div>
+      <div class="step-icon">🫧</div>
+      <div class="step-title">洁面</div>
+      <div class="step-desc">取适量洁面乳<br>清洁面部肌肤</div>
+    </div>
+    <div class="usage-step">
+      <div class="step-num">02</div>
+      <div class="step-icon">💧</div>
+      <div class="step-title">爽肤</div>
+      <div class="step-desc">轻拍爽肤水<br>打开吸收通道</div>
+    </div>
+    <div class="usage-step">
+      <div class="step-num">03</div>
+      <div class="step-icon">🧴</div>
+      <div class="step-title">取精华</div>
+      <div class="step-desc">按压2-3泵<br>于掌心温热</div>
+    </div>
+    <div class="usage-step">
+      <div class="step-num">04</div>
+      <div class="step-icon">🤲</div>
+      <div class="step-title">涂抹</div>
+      <div class="step-desc">由内向外轻按<br>直至完全吸收</div>
+    </div>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- 模块6: 使用前后对比 -->
+<div class="section comparison">
+  <div class="section-header">
+    <div class="section-tag">Before & After</div>
+    <div class="section-title">使用前后对比</div>
+    <div class="section-desc">坚持使用28天，见证肌肤焕变</div>
+  </div>
+  <div class="compare-grid">
+    <div class="compare-box">
+      <div class="compare-img-placeholder">
+        <div class="icon">📷</div>
+        使用前<br><small>350×280px</small>
+      </div>
+      <div class="compare-label">使用前</div>
+    </div>
+    <div class="compare-box">
+      <div class="compare-img-placeholder">
+        <div class="icon">📷</div>
+        使用后<br><small>350×280px</small>
+      </div>
+      <div class="compare-label">使用后</div>
+    </div>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- 模块7: 品质保障 -->
+<div class="section guarantee">
+  <div class="section-header">
+    <div class="section-tag">Quality Assurance</div>
+    <div class="section-title">品质保障</div>
+  </div>
+  <div class="guarantee-grid">
+    <div class="guarantee-item">
+      <div class="guarantee-icon">🔬</div>
+      <div class="guarantee-title">实验室研发</div>
+      <div class="guarantee-desc">法国皮肤科学实验室联合研发</div>
+    </div>
+    <div class="guarantee-item">
+      <div class="guarantee-icon">📋</div>
+      <div class="guarantee-title">权威检测</div>
+      <div class="guarantee-desc">SGS第三方安全检测认证</div>
+    </div>
+    <div class="guarantee-item">
+      <div class="guarantee-icon">🚫</div>
+      <div class="guarantee-title">无添加</div>
+      <div class="guarantee-desc">无酒精·无色素·无矿物油</div>
+    </div>
+    <div class="guarantee-item">
+      <div class="guarantee-icon">🐰</div>
+      <div class="guarantee-title">零残忍</div>
+      <div class="guarantee-desc">不做动物实验·纯素友好</div>
+    </div>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+<!-- 模块8: 产品参数 -->
+<div class="section params">
+  <div class="section-header">
+    <div class="section-tag">Specifications</div>
+    <div class="section-title">产品参数</div>
+  </div>
+  <table class="param-table">
+    <tr><td>产品名称</td><td>水润焕采精华液</td></tr>
+    <tr><td>英文名称</td><td>Hydra-Glow Repair Serum</td></tr>
+    <tr><td>规格容量</td><td>30ML / 1.0 FL.OZ</td></tr>
+    <tr><td>产地</td><td>法国</td></tr>
+    <tr><td>保质期</td><td>36个月（开封后12个月内使用）</td></tr>
+    <tr><td>适用肤质</td><td>所有肤质，尤其适合干性及混合性肌肤</td></tr>
+    <tr><td>使用方法</td><td>每日早晚，爽肤后取2-3泵，轻按至吸收</td></tr>
+    <tr><td>存储条件</td><td>避光保存，常温通风处</td></tr>
+  </table>
+</div>
+
+
+<script>
+// 确保浏览器历史里有作品页记录
+history.replaceState({from: 'detail'}, '', '');
+history.pushState({from: 'detail'}, '', '');
+
+// 监听返回事件
+window.addEventListener('popstate', function(e) {
+    window.location.href = '../index.html';
+});
+</script>
+
+</body>
+</html>

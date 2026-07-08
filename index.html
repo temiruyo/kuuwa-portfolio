@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>刘涛 | About & Works</title>
+    <style>
+        :root {
+            --bg: #fcfaf9;
+            --card: #ffffff;
+            --pink: #d4b8c8;
+            --pink-light: #f0e4ec;
+            --lavender: #c0b8d8;
+            --lavender-light: #ece4f0;
+            --mint: #b8d8c8;
+            --mint-light: #e4f0e8;
+            --peach: #dcc8a8;
+            --peach-light: #f0e8dc;
+            --text: #3a3035;
+            --text-sub: #8a7d85;
+            --text-light: #b5a8ae;
+            --border: rgba(0,0,0,0.04);
+            --radius: 16px;
+            --shadow: 0 2px 10px rgba(0,0,0,0.03);
+        }
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            -webkit-font-smoothing: antialiased;
+            line-height: 1.7;
+        }
+
+        /* ===== 顶部渐变 ===== */
+        .top-deco {
+            position: relative; width: 100%; height: 260px;
+            background: linear-gradient(160deg, #f0e4ec 0%, #ece4f0 40%, #e4f0e8 100%);
+            overflow: hidden;
+        }
+        .top-deco::after {
+            content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+            height: 80px; background: linear-gradient(to top, var(--bg), transparent);
+        }
+        .dot { position: absolute; border-radius: 50%; opacity: 0.5; }
+        .dot-1 { width: 120px; height: 120px; background: var(--pink); top: 30px; left: 10%; animation: float 6s ease-in-out infinite; }
+        .dot-2 { width: 80px; height: 80px; background: var(--lavender); top: 60px; right: 15%; animation: float 8s ease-in-out infinite 1s; }
+        .dot-3 { width: 60px; height: 60px; background: var(--mint); bottom: 40px; left: 25%; animation: float 7s ease-in-out infinite 0.5s; }
+        .dot-4 { width: 40px; height: 40px; background: var(--peach); top: 80px; left: 55%; animation: float 5s ease-in-out infinite 2s; }
+        .dot-5 { width: 90px; height: 90px; background: rgba(255,255,255,0.6); bottom: 20px; right: 10%; animation: float 9s ease-in-out infinite 1.5s; }
+        .dot-6 { width: 30px; height: 30px; background: var(--pink); top: 140px; right: 35%; animation: float 6.5s ease-in-out infinite 0.8s; }
+        @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-12px)} }
+
+        /* ===== 容器 ===== */
+        .container { max-width: 640px; margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
+
+        /* ===== 头像 ===== */
+        .avatar-section { text-align: center; margin-top: -60px; margin-bottom: 32px; }
+        .avatar-ring {
+            width: 120px; height: 120px; border-radius: 50%; padding: 4px;
+            background: linear-gradient(135deg, #d4b8c8, #c0b8d8, #b8d8c8);
+            margin: 0 auto 16px; box-shadow: 0 4px 20px rgba(232,180,184,0.3);
+        }
+        .avatar-inner {
+            width: 100%; height: 100%; border-radius: 50%; background: var(--card);
+            display: flex; align-items: center; justify-content: center; overflow: hidden;
+        }
+        .avatar-art { position: relative; width: 48px; height: 48px; }
+        .a-palette { position: absolute; width: 30px; height: 22px; background: var(--pink); border-radius: 50% 50% 50% 35%; bottom: 2px; left: 0; }
+        .a-palette::before { content:''; position:absolute; width:5px; height:5px; background:#fff; border-radius:50%; bottom:4px; left:4px; }
+        .a-palette::after { content:''; position:absolute; width:4px; height:4px; background:var(--lavender); border-radius:50%; top:4px; right:5px; }
+        .a-brush {
+            position: absolute; width: 3px; height: 26px;
+            background: linear-gradient(to bottom, var(--peach), var(--pink));
+            border-radius: 1px; top: 0; right: 4px;
+            transform: rotate(-30deg); transform-origin: bottom center;
+        }
+        .a-brush::before { content:''; position:absolute; width:5px; height:7px; background:var(--text-light); border-radius:0 0 2px 2px; bottom:-6px; left:50%; transform:translateX(-50%); }
+        .a-brush::after { content:''; position:absolute; width:4px; height:4px; background:var(--pink); border-radius:0 0 3px 3px; bottom:-10px; left:50%; transform:translateX(-50%); }
+        .profile-name { font-size: 26px; font-weight: 700; letter-spacing: 4px; margin-bottom: 4px; }
+        .profile-en { font-size: 12px; color: var(--text-light); letter-spacing: 3px; text-transform: uppercase; margin-bottom: 12px; }
+        .profile-role {
+            display: inline-flex; align-items: center; gap: 6px;
+            font-size: 12px; color: var(--text-sub);
+            background: var(--card); padding: 6px 16px;
+            border-radius: 20px; box-shadow: var(--shadow);
+        }
+        .role-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--pink); }
+
+        /* ===== 通用卡片 ===== */
+        .card {
+            background: var(--card); border-radius: var(--radius);
+            padding: 28px 24px; box-shadow: var(--shadow); margin-bottom: 20px;
+        }
+        .section-label {
+            font-size: 11px; color: var(--pink); letter-spacing: 3px; font-weight: 600;
+            text-transform: uppercase; margin-bottom: 16px;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .section-label::after { content:''; flex:1; height:1px; background:linear-gradient(90deg,#dce8f0,transparent); }
+
+        /* ===== 关于我 ===== */
+        .about-text { font-size: 14px; color: var(--text); line-height: 1.9; }
+        .about-text strong { color: var(--pink); font-weight: 600; }
+
+        /* ===== 技能 ===== */
+        .skills-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .skill-item { background: var(--bg); border-radius: 12px; padding: 16px; text-align: center; transition: transform 0.2s, box-shadow 0.2s; }
+        .skill-item:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+        .skill-icon { width: 40px; height: 40px; border-radius: 12px; margin: 0 auto 10px; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+        .skill-icon.csp { background: var(--pink-light); }
+        .skill-icon.ps { background: var(--lavender-light); }
+        .skill-icon.ai { background: var(--mint-light); }
+        .skill-icon.design { background: var(--peach-light); }
+        .skill-name { font-size: 13px; font-weight: 600; margin-bottom: 2px; }
+        .skill-desc { font-size: 11px; color: var(--text-sub); }
+
+        /* ===== 横向滑动 ===== */
+        .scroll-section { margin-bottom: 24px; }
+        .cat-label {
+            font-size: 13px; font-weight: 600; color: var(--text-sub);
+            margin-bottom: 12px; display: flex; align-items: center; gap: 10px;
+        }
+        .cat-label::after { content:''; flex:1; height:1px; background:var(--border); }
+        .scroll-hint {
+            font-size: 10px; color: var(--text-light); margin-bottom: 8px;
+            display: flex; align-items: center; gap: 4px;
+        }
+        .scroll-hint::before { content:'←'; animation: nudge 1.5s ease-in-out infinite; }
+        @keyframes nudge { 0%,100%{transform:translateX(0)} 50%{transform:translateX(-4px)} }
+        .scroll-track {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            padding-bottom: 8px;
+            scrollbar-width: thin;
+            scrollbar-color: var(--pink-light) transparent;
+        }
+        .scroll-track::-webkit-scrollbar { height: 4px; }
+        .scroll-track::-webkit-scrollbar-track { background: transparent; }
+        .scroll-track::-webkit-scrollbar-thumb { background: var(--pink-light); border-radius: 2px; }
+        .scroll-item {
+            flex: 0 0 auto;
+            width: 200px;
+            border-radius: 12px;
+            overflow: hidden;
+            background: var(--card);
+            box-shadow: var(--shadow);
+            scroll-snap-align: start;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .scroll-item:hover { transform: translateY(-2px); }
+        .scroll-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            display: block;
+        }
+        .scroll-item-info { padding: 10px 12px; }
+        .scroll-item-title { font-size: 12px; font-weight: 600; margin-bottom: 2px; }
+        .scroll-item-desc { font-size: 10px; color: var(--text-sub); }
+
+        /* ===== 电商主图网格 ===== */
+        .ecom-section { margin-bottom: 24px; }
+        .ecom-card {
+            background: var(--card); border-radius: var(--radius);
+            overflow: hidden; box-shadow: var(--shadow);
+            margin-bottom: 14px; cursor: pointer;
+            transition: transform 0.25s, box-shadow 0.25s;
+            text-decoration: none; color: inherit;
+            display: block;
+        }
+        .ecom-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+        .ecom-card-img {
+            width: 100%; aspect-ratio: 16/10; object-fit: cover; display: block;
+        }
+        .ecom-card-body { padding: 14px 18px; }
+        .ecom-card-title { font-size: 15px; font-weight: 600; margin-bottom: 2px; }
+        .ecom-card-desc { font-size: 12px; color: var(--text-sub); }
+        .ecom-card-link {
+            display: inline-block; margin-top: 8px;
+            font-size: 11px; color: var(--pink); font-weight: 500;
+            text-decoration: none;
+        }
+        .ecom-card-link:hover { text-decoration: underline; }
+
+        /* ===== 时间线 ===== */
+        .timeline { position: relative; padding-left: 20px; }
+        .timeline::before {
+            content:''; position:absolute; left:4px; top:8px; bottom:8px;
+            width:1.5px; background:linear-gradient(to bottom,#dce8f0,#e0e8f0,#dce8e0); border-radius:1px;
+        }
+        .timeline-item { position: relative; margin-bottom: 20px; }
+        .timeline-item:last-child { margin-bottom: 0; }
+        .timeline-dot { position: absolute; left: -20px; top: 6px; width: 9px; height: 9px; border-radius: 50%; border: 2px solid var(--pink); background: var(--card); }
+        .timeline-item:nth-child(2) .timeline-dot { border-color: var(--lavender); }
+        .timeline-item:nth-child(3) .timeline-dot { border-color: var(--mint); }
+        .timeline-date { font-size: 11px; color: var(--text-light); margin-bottom: 2px; }
+        .timeline-title { font-size: 14px; font-weight: 600; margin-bottom: 2px; }
+        .timeline-sub { font-size: 12px; color: var(--text-sub); }
+
+        /* ===== 联系 ===== */
+        .contact-row { display: flex; gap: 10px; flex-wrap: wrap; }
+        .contact-btn {
+            flex: 1; min-width: 120px;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+            padding: 14px 16px; background: var(--bg); border-radius: 12px;
+            text-decoration: none; color: var(--text); font-size: 13px; font-weight: 500;
+            transition: all 0.2s;
+        }
+        .contact-btn:hover { background: var(--card); box-shadow: var(--shadow); transform: translateY(-1px); }
+
+        /* ===== 页脚 ===== */
+        .footer { text-align: center; padding: 48px 0 32px; font-size: 11px; color: var(--text-light); letter-spacing: 1px; }
+        .footer-hearts { margin-bottom: 8px; font-size: 12px; letter-spacing: 4px; }
+        .gap { height: 24px; }
+
+        /* ===== Lightbox ===== */
+        .lightbox {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.92); z-index: 1000;
+            justify-content: center; align-items: center;
+            overflow: hidden; touch-action: none;
+        }
+        .lightbox.active { display: flex; }
+        .lightbox img {
+            max-width: 90%; max-height: 90%; object-fit: contain;
+            border-radius: 4px; user-select: none; -webkit-user-select: none;
+            transition: none; cursor: grab;
+        }
+        .lightbox img:active { cursor: grabbing; }
+        .lightbox-close {
+            position: absolute; top: 16px; right: 20px; font-size: 32px; color: #fff;
+            cursor: pointer; z-index: 1002; opacity: 0.6; transition: opacity 0.2s;
+            width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;
+        }
+        .lightbox-close:hover { opacity: 1; }
+        .zoom-controls {
+            position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);
+            display: flex; gap: 8px; z-index: 1002;
+        }
+        .zoom-btn {
+            width: 40px; height: 40px; border-radius: 50%; border: none;
+            background: rgba(255,255,255,0.15); color: #fff; font-size: 20px;
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
+            transition: background 0.2s; backdrop-filter: blur(4px);
+        }
+        .zoom-btn:hover { background: rgba(255,255,255,0.3); }
+        .zoom-info {
+            color: rgba(255,255,255,0.5); font-size: 12px; line-height: 40px;
+            padding: 0 8px;
+        }
+
+        /* ===== 动画 ===== */
+        @keyframes fadeInUp { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+        .about-section { animation: fadeInUp 0.5s ease-out 0.1s both; }
+        .skills-section { animation: fadeInUp 0.5s ease-out 0.2s both; }
+        .works-section { animation: fadeInUp 0.5s ease-out 0.3s both; }
+        .exp-section { animation: fadeInUp 0.5s ease-out 0.4s both; }
+        .contact-section { animation: fadeInUp 0.5s ease-out 0.5s both; }
+
+        /* ===== 滚动动画 ===== */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .fade-in-left {
+            opacity: 0;
+            transform: translateX(-30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .fade-in-left.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .fade-in-right {
+            opacity: 0;
+            transform: translateX(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .fade-in-right.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        .scale-in {
+            opacity: 0;
+            transform: scale(0.9);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .scale-in.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .fade-in, .fade-in-left, .fade-in-right, .scale-in {
+                opacity: 1; transform: none; transition: none;
+            }
+        }
+
+
+        /* ===== 响应式 ===== */
+        @media (max-width: 520px) {
+            .top-deco { height: 200px; }
+            .container { padding: 0 16px; }
+            .scroll-item { width: 160px; }
+            .scroll-item img { height: 160px; }
+            .ecom-grid { grid-template-columns: repeat(3, 1fr); gap: 6px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="top-deco">
+    <div class="dot dot-1"></div><div class="dot dot-2"></div><div class="dot dot-3"></div>
+    <div class="dot dot-4"></div><div class="dot dot-5"></div><div class="dot dot-6"></div>
+</div>
+
+<div class="container">
+
+    <!-- 头像 -->
+    <div class="avatar-section">
+        <div class="avatar-ring">
+            <div class="avatar-inner">
+                <div class="avatar-art"><div class="a-palette"></div><div class="a-brush"></div></div>
+            </div>
+        </div>
+        <h1 class="profile-name">刘涛</h1>
+        <p class="profile-en" style="font-size:13px;color:var(--text-sub);margin-top:4px;">个人作品集</p>
+        <p class="profile-en">Liu Tao</p>
+        <span class="profile-role"><span class="role-dot"></span> 插画师 · 电商视觉设计</span>
+    </div>
+
+    <!-- 关于我 -->
+    <div class="card about-section fade-in">
+        <div class="section-label">关于我</div>
+        <p class="about-text">
+            视觉传达设计专业出身，擅长<strong>板绘插画</strong>与<strong>电商视觉设计</strong>。
+            在B站从事插画约稿，独立完成从沟通需求、草稿、线稿、上色到交付的全流程。
+            熟悉 <strong>ComfyUI</strong> 等AI辅助绘画工具，能将新技术融入创作流程提升效率。
+        </p>
+    </div>
+
+    <!-- 技能 -->
+    <div class="card skills-section fade-in">
+        <div class="section-label">专业技能</div>
+        <div class="skills-grid">
+            <div class="skill-item"><div class="skill-icon csp">✏️</div><div class="skill-name">CSP</div><div class="skill-desc">主力绘画工具</div></div>
+            <div class="skill-item"><div class="skill-icon ps">🎨</div><div class="skill-name">Photoshop</div><div class="skill-desc">后期处理 · 合成</div></div>
+            <div class="skill-item"><div class="skill-icon ai">🤖</div><div class="skill-name">ComfyUI</div><div class="skill-desc">AI辅助创作</div></div>
+            <div class="skill-item"><div class="skill-icon design">◇</div><div class="skill-name">视觉设计</div><div class="skill-desc">电商 · 版式 · 配色</div></div>
+        </div>
+    </div>
+
+    <!-- 作品展示 -->
+    <div class="gap"></div>
+    <div class="section-label works-section fade-in">作品展示</div>
+
+    <!-- 古法绘制 - 横向滑动 -->
+    <div class="scroll-section fade-in">
+        <div class="cat-label">🖌️ 插画 · 古法绘制</div>
+        <div class="scroll-hint">向左滑动查看更多</div>
+        <div class="scroll-track">
+            <div class="scroll-item" onclick="openLB(this)" data-full="images/full/插画古法/菲琳.png"><img src="images/插画古法/菲琳.jpg" alt="菲琳"><div class="scroll-item-info"><div class="scroll-item-title">菲琳</div></div></div>
+            <div class="scroll-item" onclick="openLB(this)" data-full="images/full/插画古法/菲琳（全过程）.png"><img src="images/插画古法/菲琳（全过程）.jpg" alt="菲琳全过程"><div class="scroll-item-info"><div class="scroll-item-title">菲琳（全过程）</div></div></div>
+            <div class="scroll-item" onclick="openLB(this)" data-full="images/full/插画古法/3完稿.png"><img src="images/插画古法/3完稿.jpg" alt="完稿"><div class="scroll-item-info"><div class="scroll-item-title">3完稿</div></div></div>
+            <div class="scroll-item" onclick="openLB(this)" data-full="images/full/插画古法/4.png"><img src="images/插画古法/4.jpg" alt="4"><div class="scroll-item-info"><div class="scroll-item-title">4</div></div></div>
+            <div class="scroll-item" onclick="openLB(this)" data-full="images/full/插画古法/c12 9 完稿1.jpg"><img src="images/插画古法/c12 9 完稿1.jpg" alt="完稿1"><div class="scroll-item-info"><div class="scroll-item-title">c12 9 完稿1</div></div></div>
+            <div class="scroll-item" onclick="openLB(this)" data-full="images/full/插画古法/c12 4 完稿2.jpg"><img src="images/插画古法/c12 4 完稿2.jpg" alt="完稿2"><div class="scroll-item-info"><div class="scroll-item-title">c12 4 完稿2</div></div></div>
+            <div class="scroll-item" onclick="openLB(this)" data-full="images/full/插画古法/c12 5 草稿.jpg"><img src="images/插画古法/c12 5 草稿.jpg" alt="草稿"><div class="scroll-item-info"><div class="scroll-item-title">c12 5 草稿</div></div></div>
+            <div class="scroll-item" onclick="openLB(this)" data-full="images/full/插画古法/c12 7草稿.jpg"><img src="images/插画古法/c12 7草稿.jpg" alt="草稿"><div class="scroll-item-info"><div class="scroll-item-title">c12 7 草稿</div></div></div>
+            <div class="scroll-item" onclick="openLB(this)" data-full="images/full/插画古法/c12 8草稿2.jpg"><img src="images/插画古法/c12 8草稿2.jpg" alt="草稿2"><div class="scroll-item-info"><div class="scroll-item-title">c12 8 草稿2</div></div></div>
+            <div class="scroll-item" onclick="openLB(this)" data-full="images/full/插画古法/1780476111710.png"><img src="images/插画古法/1780476111710.jpg" alt="新作品"><div class="scroll-item-info"><div class="scroll-item-title">角色草稿</div></div></div>
+        </div>
+    </div>
+
+    <!-- AI制图 - 横向滑动 -->
+    <div class="scroll-section fade-in">
+        <div class="cat-label">🤖 插画 · AI制图</div>
+        <div class="scroll-hint">向左滑动查看更多</div>
+        <div class="scroll-track">
+            <div class="scroll-item" onclick="openLB(this)"><img src="images/插画AI/ComfyUI_00252_.jpg" alt="ComfyUI 00252"><div class="scroll-item-info"><div class="scroll-item-title">ComfyUI_00252</div></div></div>
+            <div class="scroll-item" onclick="openLB(this)"><img src="images/插画AI/ComfyUI_00262_.jpg" alt="ComfyUI 00262"><div class="scroll-item-info"><div class="scroll-item-title">ComfyUI_00262</div></div></div>
+            <div class="scroll-item" onclick="openLB(this)"><img src="images/插画AI/ComfyUI_00263_.jpg" alt="ComfyUI 00263"><div class="scroll-item-info"><div class="scroll-item-title">ComfyUI_00263</div></div></div>
+            <div class="scroll-item" onclick="openLB(this)"><img src="images/插画AI/ComfyUI_00285_.jpg" alt="ComfyUI 00285"><div class="scroll-item-info"><div class="scroll-item-title">ComfyUI_00285</div></div></div>
+            <div class="scroll-item" onclick="openLB(this)"><img src="images/插画AI/ComfyUI_00286_.jpg" alt="ComfyUI 00286"><div class="scroll-item-info"><div class="scroll-item-title">ComfyUI_00286</div></div></div>
+            <div class="scroll-item" onclick="openLB(this)"><img src="images/插画AI/ComfyUI_00359_.jpg" alt="ComfyUI 00359"><div class="scroll-item-info"><div class="scroll-item-title">ComfyUI_00359</div></div></div>
+        </div>
+    </div>
+
+    <!-- 电商海报 - 横向滑动 -->
+    <div class="scroll-section fade-in">
+        <div class="cat-label">📢 电商海报</div>
+        <div class="scroll-hint">向左滑动查看更多</div>
+        <div class="scroll-track">
+            <div class="scroll-item" onclick="openLB(this)"><img src="images/电商海报/111.png" alt="111"><div class="scroll-item-info"><div class="scroll-item-title">111</div></div></div>
+            <div class="scroll-item" onclick="openLB(this)"><img src="images/电商海报/鼎匯1.jpg" alt="鼎匯"><div class="scroll-item-info"><div class="scroll-item-title">鼎匯</div></div></div>
+            <div class="scroll-item" onclick="openLB(this)"><img src="images/电商海报/涵信.png" alt="涵信"><div class="scroll-item-info"><div class="scroll-item-title">涵信</div></div></div>
+            <div class="scroll-item" onclick="openLB(this)"><img src="images/电商海报/金田耗材海报底部修改.jpg" alt="金田耗材"><div class="scroll-item-info"><div class="scroll-item-title">金田耗材</div></div></div>
+            <div class="scroll-item" onclick="openLB(this)"><img src="images/电商海报/蓝调山水风扇海报.png" alt="风扇海报"><div class="scroll-item-info"><div class="scroll-item-title">风扇海报</div></div></div>
+            <div class="scroll-item" onclick="openLB(this)"><img src="images/电商海报/轮播.png" alt="轮播"><div class="scroll-item-info"><div class="scroll-item-title">轮播</div></div></div>
+        </div>
+    </div>
+
+    <!-- 电商设计 -->
+    <div class="ecom-section fade-in">
+        <div class="cat-label">🛒 电商视觉设计</div>
+
+        <!-- 云感沙发 -->
+        <a class="ecom-card scale-in" href="detail/云感沙发.html">
+            <img class="ecom-card-img" src="images/电商/img_1.jpg" alt="云感沙发">
+            <div class="ecom-card-body">
+                <div class="ecom-card-title">🛋️ 云感沙发</div>
+                <div class="ecom-card-desc">主图 · 场景图 · 卖点图</div>
+                <span class="ecom-card-link">查看完整详情页 →</span>
+            </div>
+        </a>
+
+        <!-- 床头柜 -->
+        <a class="ecom-card scale-in" href="detail/床头柜.html">
+            <img class="ecom-card-img" src="images/电商/hero.jpg" alt="床头柜">
+            <div class="ecom-card-body">
+                <div class="ecom-card-title">🪑 床头柜详情页</div>
+                <div class="ecom-card-desc">主图 · 场景图 · 功能展示</div>
+                <span class="ecom-card-link">查看完整详情页 →</span>
+            </div>
+        </a>
+
+        <!-- 化妆品 -->
+        <a class="ecom-card scale-in" href="detail/化妆品.html">
+            <img class="ecom-card-img" src="images/电商/主图2_场景图.jpg" alt="化妆品详情模板">
+            <div class="ecom-card-body">
+                <div class="ecom-card-title">💄 化妆品详情模板</div>
+                <div class="ecom-card-desc">主图5张 · 详情页长图 · 完整视觉方案</div>
+                <span class="ecom-card-link">查看完整详情页 →</span>
+            </div>
+        </a>
+    </div>
+<!-- 经历 -->
+    <div class="gap"></div>
+    <div class="card exp-section fade-in">
+        <div class="section-label">经历</div>
+        <div class="timeline">
+            <div class="timeline-item fade-in-left"><div class="timeline-dot"></div><div class="timeline-date">2022 — 至今</div><div class="timeline-title">自由插画师</div><div class="timeline-sub">B站接单，商业插画委托，抱枕立绘、同人插画等约稿</div></div>
+            <div class="timeline-item fade-in-left"><div class="timeline-dot"></div><div class="timeline-date">2026 — 7月</div><div class="timeline-title">电商视觉设计</div><div class="timeline-sub">B2B电商海报、云感沙发、床头柜、化妆品详情页等独立项目</div></div>
+            <div class="timeline-item fade-in-left"><div class="timeline-dot"></div><div class="timeline-date">2019 — 2022</div><div class="timeline-title">江西陶瓷工艺美术职业技术学院</div><div class="timeline-sub">移动互联网UI设计 · 专科</div></div>
+        </div>
+    </div>
+
+    <!-- 联系 -->
+    <div class="card contact-section fade-in">
+        <div class="section-label">联系我</div>
+        <div class="contact-row">
+            <a href="mailto:2943436946@qq.com" class="contact-btn"><span>✉️</span> 邮件联系</a>
+            <a href="https://space.bilibili.com" class="contact-btn" target="_blank"><span>📺</span> B站主页</a>
+        </div>
+    </div>
+</div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+    <span class="lightbox-close" onclick="closeLB()">&times;</span>
+    <img id="lb-img" src="" alt="查看大图" draggable="false">
+    <div class="zoom-controls">
+        <button class="zoom-btn" onclick="zoomIn()">+</button>
+        <span class="zoom-info" id="zoom-info">100%</span>
+        <button class="zoom-btn" onclick="zoomOut()">−</button>
+        <button class="zoom-btn" onclick="zoomReset()" style="font-size:14px;">↺</button>
+    </div>
+</div>
+
+<script>
+var lbImg = null;
+var fullSrc = '';
+var thumbSrc = '';
+var scale = 1;
+var panX = 0, panY = 0;
+var isDragging = false;
+var dragStartX, dragStartY;
+
+function openLB(el) {
+    var img = el.querySelector('img');
+    if (!img) return;
+    lbImg = document.getElementById('lb-img');
+    thumbSrc = img.src;
+    fullSrc = el.getAttribute('data-full') || img.src;
+    lbImg.src = thumbSrc;
+    scale = 1; panX = 0; panY = 0;
+    updateTransform();
+    document.getElementById('lightbox').classList.add('active');
+}
+
+function updateTransform() {
+    if (!lbImg) return;
+    lbImg.style.transform = 'translate(' + panX + 'px, ' + panY + 'px) scale(' + scale + ')';
+    document.getElementById('zoom-info').textContent = Math.round(scale * 100) + '%';
+}
+
+function zoomIn() {
+    scale = Math.min(scale * 1.3, 5);
+    if (scale > 1 && lbImg.src !== fullSrc) lbImg.src = fullSrc;
+    updateTransform();
+}
+
+function zoomOut() {
+    scale = Math.max(scale / 1.3, 0.5);
+    if (scale <= 1) { panX = 0; panY = 0; lbImg.src = thumbSrc; }
+    updateTransform();
+}
+
+function zoomReset() {
+    scale = 1; panX = 0; panY = 0;
+    lbImg.src = thumbSrc;
+    updateTransform();
+}
+
+function closeLB() {
+    document.getElementById('lightbox').classList.remove('active');
+    scale = 1; panX = 0; panY = 0;
+}
+
+// Mouse events
+document.getElementById('lb-img').addEventListener('mousedown', function(e) {
+    if (scale <= 1) return;
+    isDragging = true;
+    dragStartX = e.clientX - panX;
+    dragStartY = e.clientY - panY;
+    e.preventDefault();
+});
+
+document.addEventListener('mousemove', function(e) {
+    if (!isDragging) return;
+    panX = e.clientX - dragStartX;
+    panY = e.clientY - dragStartY;
+    updateTransform();
+});
+
+document.addEventListener('mouseup', function() { isDragging = false; });
+
+// Double click to toggle zoom
+document.getElementById('lb-img').addEventListener('dblclick', function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    if (scale > 1) {
+        scale = 1; panX = 0; panY = 0;
+        lbImg.src = thumbSrc;
+    } else {
+        scale = 2;
+        lbImg.src = fullSrc;
+    }
+    updateTransform();
+});
+
+// Scroll wheel zoom
+document.getElementById('lightbox').addEventListener('wheel', function(e) {
+    e.preventDefault();
+    if (e.deltaY < 0) {
+        scale = Math.min(scale * 1.1, 5);
+        if (scale > 1 && lbImg.src !== fullSrc) lbImg.src = fullSrc;
+    } else {
+        scale = Math.max(scale / 1.1, 0.5);
+        if (scale <= 1) { panX = 0; panY = 0; lbImg.src = thumbSrc; }
+    }
+    updateTransform();
+});
+
+// Touch pinch zoom
+var touchDist = 0, touchScale = 1;
+document.getElementById('lightbox').addEventListener('touchstart', function(e) {
+    if (e.touches.length === 2) {
+        touchDist = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
+        touchScale = scale;
+    } else if (e.touches.length === 1 && scale > 1) {
+        isDragging = true;
+        dragStartX = e.touches[0].clientX - panX;
+        dragStartY = e.touches[0].clientY - panY;
+    }
+});
+
+document.getElementById('lightbox').addEventListener('touchmove', function(e) {
+    e.preventDefault();
+    if (e.touches.length === 2) {
+        var d = Math.hypot(e.touches[0].clientX - e.touches[1].clientX, e.touches[0].clientY - e.touches[1].clientY);
+        scale = Math.max(0.5, Math.min(5, touchScale * (d / touchDist)));
+        if (scale > 1 && lbImg.src !== fullSrc) lbImg.src = fullSrc;
+        updateTransform();
+    } else if (isDragging && e.touches.length === 1) {
+        panX = e.touches[0].clientX - dragStartX;
+        panY = e.touches[0].clientY - dragStartY;
+        updateTransform();
+    }
+});
+
+document.getElementById('lightbox').addEventListener('touchend', function() { isDragging = false; });
+
+// Keyboard
+document.addEventListener('keydown', function(e) {
+    if (!document.getElementById('lightbox').classList.contains('active')) return;
+    if (e.key === 'Escape') closeLB();
+    if (e.key === '+' || e.key === '=') zoomIn();
+    if (e.key === '-') zoomOut();
+    if (e.key === '0') zoomReset();
+});
+
+// 滚动动画
+(function() {
+    var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-in, .fade-in-left, .fade-in-right, .scale-in').forEach(function(el) {
+        observer.observe(el);
+    });
+})();
+
+
+// 保存滚动位置
+window.addEventListener('beforeunload', function() {
+    localStorage.setItem('scrollPos', window.scrollY);
+});
+
+// 恢复滚动位置
+(function() {
+    var pos = localStorage.getItem('scrollPos');
+    if (pos) {
+        window.scrollTo(0, parseInt(pos));
+        localStorage.removeItem('scrollPos');
+    }
+})();
+
+</script>
+
+</body>
+</html>

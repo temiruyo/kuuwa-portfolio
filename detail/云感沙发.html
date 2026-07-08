@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{max-width:750px;margin:0 auto;font-family:'Microsoft YaHei','PingFang SC',sans-serif;background:#faf8f5;color:#3d3833}
+:root{--bg:#faf8f5;--bg-warm:#f5f1eb;--bg-card:#fff;--gold:#b8975a;--gold-light:#d4b87a;--text:#3d3833;--text-dim:#8a8078;--text-light:#b5aca3;--border:rgba(0,0,0,0.06);--shadow:0 2px 20px rgba(0,0,0,0.04)}
+
+.sec{padding:50px 40px}
+.sec-label{font-size:13px;color:#b8975a;letter-spacing:6px;text-transform:uppercase;margin-bottom:6px}
+.sec-title{font-size:30px;font-weight:300;color:#2d2823;letter-spacing:4px;line-height:1.4;margin-bottom:4px}
+.sec-sub{font-size:15px;color:#b5aca3;letter-spacing:3px;margin-bottom:30px}
+
+/* ====== 1. HERO ====== */
+.hero{padding:0;position:relative}
+.hero img{width:100%;display:block;aspect-ratio:4/3;object-fit:cover}
+.hero-overlay{position:absolute;top:50%;left:40px;transform:translateY(-50%)}
+.hero-overlay .brand{font-size:13px;color:rgba(255,255,255,0.7);letter-spacing:8px;margin-bottom:8px}
+.hero-overlay h1{font-size:42px;font-weight:200;color:#fff;letter-spacing:6px;line-height:1.2;text-shadow:0 2px 20px rgba(0,0,0,0.3)}
+.hero-overlay .price{font-size:28px;font-weight:300;color:rgba(255,255,255,0.9);margin-top:12px}
+
+/* ====== 2. DESIGN PHILOSOPHY ====== */
+.philosophy{background:var(--bg);display:flex;gap:40px;align-items:center}
+.philosophy .phil-img{flex:1;border-radius:8px;overflow:hidden}
+.philosophy .phil-img img{width:100%;display:block;aspect-ratio:1;object-fit:cover}
+.philosophy .phil-text{flex:1}
+.philosophy .phil-text p{font-size:18px;color:#6b625a;line-height:1.9;font-weight:300}
+
+/* ====== 3. MATERIALS ====== */
+.materials{background:var(--bg-warm)}
+.material-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+.mat-card{text-align:center}
+.mat-card .mat-img{width:100%;border-radius:10px;overflow:hidden;aspect-ratio:1;margin-bottom:14px}
+.mat-card .mat-img img{width:100%;height:100%;object-fit:cover}
+.mat-card .mat-name{font-size:20px;font-weight:500;color:#2d2823;margin-bottom:4px}
+.mat-card .mat-desc{font-size:15px;color:#8a8078;line-height:1.5}
+
+/* ====== 4. CRAFT DETAILS ====== */
+.craft{background:var(--bg)}
+.craft-row{display:flex;gap:20px;align-items:center;margin-bottom:24px}
+.craft-row:nth-child(even){flex-direction:row-reverse}
+.craft-row .craft-img{flex:1;border-radius:10px;overflow:hidden;aspect-ratio:4/3}
+.craft-row .craft-img img{width:100%;height:100%;object-fit:cover}
+.craft-row .craft-text{flex:1;padding:10px}
+.craft-row .craft-text h4{font-size:22px;font-weight:500;color:#2d2823;margin-bottom:8px;letter-spacing:1px}
+.craft-row .craft-text p{font-size:16px;color:#8a8078;line-height:1.8;font-weight:300}
+
+/* ====== 5. DIMENSIONS ====== */
+.dims{background:var(--bg-warm)}
+.dim-table{width:100%;border-collapse:collapse}
+.dim-table tr{border-bottom:1px solid var(--border)}
+.dim-table td{padding:18px 20px;font-size:17px}
+.dim-table td:first-child{color:#8a8078;width:140px;font-weight:300}
+.dim-table td:last-child{color:#3d3833;font-weight:500}
+
+/* ====== 6. LIFESTYLE ====== */
+.lifestyle{background:var(--bg)}
+.ls-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.ls-card{border-radius:10px;overflow:hidden;position:relative}
+.ls-card img{width:100%;display:block;aspect-ratio:3/4;object-fit:cover}
+.ls-card .ls-cap{position:absolute;bottom:0;left:0;right:0;padding:40px 20px 16px;background:linear-gradient(0deg,rgba(0,0,0,0.5),transparent)}
+.ls-card .ls-cap .ls-title{font-size:17px;color:#fff;font-weight:500}
+.ls-card .ls-cap .ls-desc{font-size:14px;color:rgba(255,255,255,0.7);margin-top:2px}
+
+/* ====== 7. SERVICE ====== */
+.service{background:var(--bg-warm);padding:50px 40px 60px}
+.service-items{display:flex;gap:24px;margin-bottom:30px}
+.svc-item{flex:1;text-align:center;padding:30px 16px;background:var(--bg-card);border-radius:10px;box-shadow:var(--shadow)}
+.svc-item svg{width:32px;height:32px;stroke:#b8975a;fill:none;stroke-width:1.5;margin-bottom:14px}
+.svc-item .svc-title{font-size:18px;color:#2d2823;font-weight:500;margin-bottom:4px}
+.svc-item .svc-desc{font-size:14px;color:#8a8078}
+.svc-note{padding:20px 24px;background:var(--bg-card);border-radius:10px;box-shadow:var(--shadow)}
+.svc-note p{font-size:15px;color:#8a8078;line-height:2;font-weight:300}
+
+        
+        /* ===== 手机适配 ===== */
+        @media (max-width: 600px) {
+            body { max-width: 100%; }
+            .sec { padding: 30px 16px; }
+            .sec-label { font-size: 11px; letter-spacing: 4px; }
+            .sec-title { font-size: 22px; letter-spacing: 2px; }
+            .sec-sub { font-size: 13px; letter-spacing: 1px; margin-bottom: 20px; }
+            
+            /* Hero */
+            .hero-overlay { left: 16px; right: 16px; }
+            .hero-overlay h1 { font-size: 26px; letter-spacing: 3px; }
+            .hero-overlay .brand { font-size: 11px; letter-spacing: 4px; }
+            .hero-overlay .price { font-size: 20px; }
+            
+            /* Philosophy */
+            .philosophy { flex-direction: column; gap: 20px; }
+            .philosophy .phil-text p { font-size: 15px; }
+            
+            /* Materials */
+            .material-grid { grid-template-columns: 1fr; gap: 20px; }
+            .mat-card .mat-name { font-size: 17px; }
+            .mat-card .mat-desc { font-size: 13px; }
+            
+            /* Craft */
+            .craft-row { flex-direction: column !important; gap: 12px; margin-bottom: 20px; }
+            .craft-row .craft-img { width: 100%; aspect-ratio: 16/10; }
+            .craft-row .craft-text { padding: 0; }
+            .craft-row .craft-text h4 { font-size: 18px; }
+            .craft-row .craft-text p { font-size: 14px; }
+            
+            /* Dimensions */
+            .dim-table td { padding: 12px 10px; font-size: 14px; }
+            .dim-table td:first-child { width: 90px; }
+            
+            /* Lifestyle */
+            .ls-grid { grid-template-columns: 1fr; }
+            .ls-card img { aspect-ratio: 16/10; }
+            
+            /* Service */
+            .service { padding: 30px 16px 40px; }
+            .service-items { flex-direction: column; gap: 12px; }
+            .svc-item { padding: 20px 16px; }
+            .svc-item .svc-title { font-size: 16px; }
+            .svc-item .svc-desc { font-size: 13px; }
+            .svc-note p { font-size: 13px; }
+            
+            /* Back button */
+            .back-btn { top: 12px; left: 12px; padding: 8px 14px; font-size: 13px; }
+        }
+
+</style>
+
+<style>
+.back-btn {
+    position: fixed; top: 20px; left: 20px; z-index: 9999;
+    background: rgba(255,255,255,0.9); border: none; border-radius: 24px;
+    padding: 10px 20px; font-size: 14px; color: #333; cursor: pointer;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 6px;
+    transition: all 0.2s; backdrop-filter: blur(8px);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", sans-serif;
+}
+.back-btn:hover { background: #fff; box-shadow: 0 4px 16px rgba(0,0,0,0.15); transform: translateY(-1px); }
+
+        /* ===== 手机适配 ===== */
+        @media (max-width: 520px) {
+            body { padding: 0; }
+            .hero { height: auto; min-height: 200px; padding: 40px 16px; }
+            .hero h1 { font-size: 20px; }
+            .hero p { font-size: 12px; }
+            section { padding: 24px 16px; }
+            h2 { font-size: 16px; margin-bottom: 12px; }
+            p, li { font-size: 13px; line-height: 1.7; }
+            .philosophy { grid-template-columns: 1fr; }
+            .mat-card { padding: 14px; }
+            .craft-row { flex-direction: column; }
+            .craft-row .craft-img { width: 100%; height: 180px; }
+            .dim-table td:first-child { width: 100px; font-size: 12px; }
+            .dim-table td:last-child { font-size: 12px; }
+            .ls-card { width: 48%; }
+            .svc-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+            .svc-item { padding: 14px 10px; }
+            .svc-item h4 { font-size: 13px; }
+            .svc-item p { font-size: 11px; }
+            .back-btn { top: 12px; left: 12px; padding: 8px 14px; font-size: 13px; }
+        }
+
+
+        /* ===== 手机适配 ===== */
+        @media (max-width: 600px) {
+            body { max-width: 100%; }
+            .sec { padding: 30px 16px; }
+            .sec-label { font-size: 11px; letter-spacing: 4px; }
+            .sec-title { font-size: 22px; letter-spacing: 2px; }
+            .sec-sub { font-size: 13px; letter-spacing: 1px; margin-bottom: 20px; }
+            
+            /* Hero */
+            .hero-overlay { left: 16px; right: 16px; }
+            .hero-overlay h1 { font-size: 26px; letter-spacing: 3px; }
+            .hero-overlay .brand { font-size: 11px; letter-spacing: 4px; }
+            .hero-overlay .price { font-size: 20px; }
+            
+            /* Philosophy */
+            .philosophy { flex-direction: column; gap: 20px; }
+            .philosophy .phil-text p { font-size: 15px; }
+            
+            /* Materials */
+            .material-grid { grid-template-columns: 1fr; gap: 20px; }
+            .mat-card .mat-name { font-size: 17px; }
+            .mat-card .mat-desc { font-size: 13px; }
+            
+            /* Craft */
+            .craft-row { flex-direction: column !important; gap: 12px; margin-bottom: 20px; }
+            .craft-row .craft-img { width: 100%; aspect-ratio: 16/10; }
+            .craft-row .craft-text { padding: 0; }
+            .craft-row .craft-text h4 { font-size: 18px; }
+            .craft-row .craft-text p { font-size: 14px; }
+            
+            /* Dimensions */
+            .dim-table td { padding: 12px 10px; font-size: 14px; }
+            .dim-table td:first-child { width: 90px; }
+            
+            /* Lifestyle */
+            .ls-grid { grid-template-columns: 1fr; }
+            .ls-card img { aspect-ratio: 16/10; }
+            
+            /* Service */
+            .service { padding: 30px 16px 40px; }
+            .service-items { flex-direction: column; gap: 12px; }
+            .svc-item { padding: 20px 16px; }
+            .svc-item .svc-title { font-size: 16px; }
+            .svc-item .svc-desc { font-size: 13px; }
+            .svc-note p { font-size: 13px; }
+            
+            /* Back button */
+            .back-btn { top: 12px; left: 12px; padding: 8px 14px; font-size: 13px; }
+        }
+
+</style>
+
+</head>
+<body>
+<a href="../index.html" class="back-btn" onclick="localStorage.setItem('scrollPos', history.state?.scrollPos || 0);">← 返回作品集</a>
+
+
+<!-- 1. HERO -->
+<div class="hero">
+  <img src="素材/img_1.jpg" alt="">
+  <div class="hero-overlay">
+    <div class="brand">ATELIER NO.7</div>
+    <h1>云感沙发<br>Cloud Sofa</h1>
+    <div class="price">¥ 12,800</div>
+  </div>
+</div>
+
+<!-- 2. DESIGN PHILOSOPHY -->
+<div class="sec philosophy">
+  <div class="phil-img"><img src="素材/img_9.jpg" alt=""></div>
+  <div class="phil-text">
+    <div class="sec-label">Design Philosophy</div>
+    <div class="sec-title">以云为形<br>以触为魂</div>
+    <p>灵感源自天际流云的弧线。我们相信一件好的家具应当让人忘记它的存在——只留下松弛与安宁。每一道曲线都经过上百次打版，在美学与人体工学之间找到那个「恰好」的弧度。</p>
+  </div>
+</div>
+
+<!-- 3. MATERIALS -->
+<div class="sec materials">
+  <div class="sec-label">Materials</div>
+  <div class="sec-title">选材，从源头开始</div>
+  <div class="sec-sub">SOURCED FROM THE ORIGIN</div>
+  <div class="material-grid">
+    <div class="mat-card">
+      <div class="mat-img"><img src="素材/fabric_final.jpg" alt=""></div>
+      <div class="mat-name">意大利圈绒面料</div>
+      <div class="mat-desc">Bouclé Fabric<br>亲肤透气 · 天然抗皱</div>
+    </div>
+    <div class="mat-card">
+      <div class="mat-img"><img src="素材/foam.jpg" alt="" style="filter:sepia(0.25) saturate(0.7) hue-rotate(-10deg) brightness(0.93)"></div>
+      <div class="mat-name">高密度回弹海绵</div>
+      <div class="mat-desc">45D Memory Foam<br>久坐不塌 · 慢回弹支撑</div>
+    </div>
+    <div class="mat-card">
+      <div class="mat-img"><img src="素材/bed_cropped.jpg" alt=""></div>
+      <div class="mat-name">北美白橡木框架</div>
+      <div class="mat-desc">Solid White Oak<br>FAS级 · 四面见线工艺</div>
+    </div>
+  </div>
+</div>
+
+<!-- 4. CRAFT -->
+<div class="sec craft">
+  <div class="sec-label">Craftsmanship</div>
+  <div class="sec-title">匠人手工 · 细节见真章</div>
+  <div class="sec-sub">HANDCRAFTED WITH CARE</div>
+  <div class="craft-row">
+    <div class="craft-img"><img src="素材/chenille.jpg" alt=""></div>
+    <div class="craft-text">
+      <h4>手工褶皱缝制</h4>
+      <p>每一条褶皱均由十年以上经验的老师傅手工捏制。非流水线量产，一天仅能完成一台沙发的褶皱工序。</p>
+    </div>
+  </div>
+  <div class="craft-row">
+    <div class="craft-img"><img src="素材/joint_1.jpg" alt=""></div>
+    <div class="craft-text">
+      <h4>榫卯结构框架</h4>
+      <p>坚持传统榫卯接合，不使用一颗铁钉。白橡木框架历经三次打磨、两次上蜡，触感温润如玉。</p>
+    </div>
+  </div>
+</div>
+
+<!-- 5. DIMENSIONS -->
+<div class="sec dims">
+  <div class="sec-label">Dimensions</div>
+  <div class="sec-title">产品规格</div>
+  <div class="sec-sub">SPECIFICATIONS</div>
+  <table class="dim-table">
+    <tr><td>整体尺寸</td><td>W220 × D95 × H72 cm</td></tr>
+    <tr><td>座深</td><td>62 cm</td></tr>
+    <tr><td>座高</td><td>42 cm</td></tr>
+    <tr><td>扶手高度</td><td>58 cm</td></tr>
+    <tr><td>框架材质</td><td>北美FAS级白橡木 · 榫卯结构</td></tr>
+    <tr><td>填充材质</td><td>45D高密度回弹海绵 + 羽绒复合层</td></tr>
+    <tr><td>面料</td><td>意大利进口圈绒Bouclé</td></tr>
+    <tr><td>颜色</td><td>奶油白 / 燕麦灰 / 雾霾蓝</td></tr>
+  </table>
+</div>
+
+<!-- 6. LIFESTYLE -->
+<div class="sec lifestyle">
+  <div class="sec-label">Lifestyle</div>
+  <div class="sec-title">融入你的生活</div>
+  <div class="sec-sub">IN YOUR SPACE</div>
+  <div class="ls-grid">
+    <div class="ls-card">
+      <img src="素材/img_6.jpg" alt="">
+      <div class="ls-cap"><div class="ls-title">客厅 · 光影之间</div><div class="ls-desc">自然光下的柔软质感</div></div>
+    </div>
+    <div class="ls-card">
+      <img src="素材/img_7.jpg" alt="">
+      <div class="ls-cap"><div class="ls-title">起居 · 静谧时刻</div><div class="ls-desc">傍晚时分的温暖一角</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- 7. SERVICE -->
+<div class="service">
+  <div class="sec-label">Service</div>
+  <div class="sec-title">无忧服务</div>
+  <div class="sec-sub">PEACE OF MIND</div>
+  <div class="service-items">
+    <div class="svc-item">
+      <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13" rx="2"/><polygon points="16,8 20,8 23,11 23,16 16,16"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+      <div class="svc-title">免费配送安装</div>
+      <div class="svc-desc">全国200+城市</div>
+    </div>
+    <div class="svc-item">
+      <svg viewBox="0 0 24 24"><polyline points="1,4 1,10 7,10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg>
+      <div class="svc-title">365天质保</div>
+      <div class="svc-desc">质量问题免费换新</div>
+    </div>
+    <div class="svc-item">
+      <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      <div class="svc-title">终身养护</div>
+      <div class="svc-desc">免费上门保养</div>
+    </div>
+  </div>
+  <div class="svc-note">
+    <p>· 下单后7-15个工作日由专属工匠手工制作完成</p>
+    <p>· 全国免费配送入户安装，支持开箱验货后签收</p>
+    <p>· 365天内非人为质量问题免费换新，终身免费上门保养</p>
+    <p>· 每件沙发附专属身份编号，可在官网查询制作工匠及木材溯源</p>
+  </div>
+</div>
+
+
+<script>
+// 确保浏览器历史里有作品页记录
+history.replaceState({from: 'detail'}, '', '');
+history.pushState({from: 'detail'}, '', '');
+
+// 监听返回事件
+window.addEventListener('popstate', function(e) {
+    window.location.href = '../index.html';
+});
+</script>
+
+</body>
+</html>

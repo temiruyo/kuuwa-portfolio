@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{max-width:750px;margin:0 auto;font-family:'Microsoft YaHei','PingFang SC',sans-serif;background:#faf8f5;color:#3d3833}
+
+:root{
+  --bg:#faf8f5;
+  --bg-warm:#f5f1eb;
+  --gold:#b8975a;
+  --gold-light:rgba(184,151,90,0.12);
+  --text:#3d3833;
+  --text-dim:#8a8078;
+  --text-light:#b5aca3;
+  --border:rgba(0,0,0,0.06);
+  --shadow:0 2px 20px rgba(0,0,0,0.04);
+}
+
+.sec{padding:60px 50px;position:relative}
+.sec-label{display:flex;align-items:center;justify-content:center;gap:18px;margin-bottom:10px}
+.sec-label .line{width:36px;height:1px;background:rgba(184,151,90,0.25)}
+.sec-label span{font-size:15px;color:#b5aca3;letter-spacing:5px}
+.sec-title{text-align:center;font-size:32px;font-weight:300;color:#3d3833;margin-bottom:8px;letter-spacing:4px}
+.sec-subtitle{text-align:center;font-size:16px;color:#b5aca3;letter-spacing:6px;margin-bottom:30px}
+
+/* 1. Hero */
+.brand-hero{background:linear-gradient(180deg,#faf8f5,#f5f1eb);padding:60px 50px 50px;text-align:center}
+.brand-hero .logo-line{display:flex;align-items:center;justify-content:center;gap:12px;margin-bottom:14px}
+.brand-hero .logo-line .diam{width:8px;height:8px;background:linear-gradient(135deg,#b8975a,#a08548);transform:rotate(45deg)}
+.brand-hero .logo-line span{font-size:18px;color:#b5aca3;letter-spacing:8px;font-weight:300}
+.brand-hero h1{font-size:48px;font-weight:300;color:#3d3833;letter-spacing:8px;margin-bottom:10px}
+.brand-hero .tagline{font-size:17px;color:#b5aca3;letter-spacing:10px;margin-bottom:28px}
+.brand-hero .banner{width:100%;height:420px;border-radius:12px;overflow:hidden;border:1px solid var(--border)}
+.brand-hero .banner img{width:100%;height:100%;object-fit:cover;object-position:center 40%}
+.brand-hero .price{margin-top:24px;font-size:36px;color:#b8975a;font-weight:300;letter-spacing:2px}
+.brand-hero .price span{font-size:20px;color:#b5aca3;font-weight:300}
+
+/* 2. Philosophy — text only */
+.philosophy{background:#faf8f5}
+.philo-quote{text-align:center;max-width:560px;margin:0 auto}
+.philo-quote .big{font-size:28px;font-weight:300;color:#3d3833;line-height:1.8;letter-spacing:2px;margin-bottom:20px}
+.philo-quote .big em{font-style:normal;color:#b8975a}
+.philo-quote p{font-size:16px;color:#8a8078;line-height:2}
+.philo-divider{width:60px;height:1px;background:var(--gold);margin:30px auto;opacity:0.4}
+.philo-features{display:flex;gap:40px;justify-content:center;margin-top:30px}
+.philo-feat{text-align:center;flex:1}
+.philo-feat .num{font-size:36px;font-weight:200;color:#b8975a;margin-bottom:4px}
+.philo-feat .label{font-size:14px;color:#b5aca3;letter-spacing:2px}
+
+/* 3. Materials — real photos with CSS crop */
+.materials{background:#f5f1eb}
+.material-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px}
+.material-card{background:#fff;border-radius:12px;overflow:hidden;border:1px solid var(--border);box-shadow:var(--shadow)}
+.material-card .mat-photo{height:180px;overflow:hidden;position:relative}
+.material-card .mat-photo img{width:100%;height:100%;object-fit:cover;display:block}
+/* Crop positions for hero.jpg nightstand area */
+.mat-photo.crop-wood img{object-position:82% 55%}
+.mat-photo.crop-paint img{object-position:75% 30%}
+.mat-photo.crop-rail img{object-position:88% 70%}
+.material-card .mat-photo::after{content:'';position:absolute;inset:0;background:linear-gradient(transparent 60%,rgba(0,0,0,0.06))}
+.material-card .info{padding:22px 20px;text-align:center}
+.material-card .info h4{font-size:18px;font-weight:300;color:#3d3833;margin-bottom:8px}
+.material-card .info p{font-size:14px;color:#8a8078;line-height:1.7}
+
+/* 4. Craftsmanship — real photos with CSS crop */
+.craftsmanship{background:#faf8f5}
+.craft-list{display:flex;flex-direction:column;gap:40px}
+.craft-item{display:flex;gap:30px;align-items:center}
+.craft-item:nth-child(even){flex-direction:row-reverse}
+.craft-photo{width:200px;height:200px;border-radius:50%;overflow:hidden;flex-shrink:0;border:3px solid var(--gold-light)}
+.craft-photo img{width:100%;height:100%;object-fit:cover}
+/* Crop positions for different detail areas */
+.craft-photo.crop-round img{object-position:78% 45%}
+.craft-photo.crop-joint img{object-position:70% 60%}
+.craft-photo.crop-finish img{object-position:90% 50%}
+.craft-text{flex:1}
+.craft-text h4{font-size:22px;font-weight:300;color:#3d3833;margin-bottom:10px;letter-spacing:1px}
+.craft-text p{font-size:16px;color:#8a8078;line-height:1.9}
+.craft-tag{display:inline-block;margin-top:12px;padding:4px 16px;border:1px solid rgba(184,151,90,0.3);border-radius:20px;font-size:13px;color:#b8975a;letter-spacing:1px}
+
+/* 5. Color Options */
+.color-section{background:#f5f1eb}
+.color-row{display:flex;gap:24px;justify-content:center;margin-bottom:30px}
+.color-opt{text-align:center}
+.color-circle{width:72px;height:72px;border-radius:50%;margin:0 auto 10px;border:3px solid transparent;box-shadow:0 2px 12px rgba(0,0,0,0.08)}
+.color-circle.active{border-color:var(--gold)}
+.color-circle.natural{background:linear-gradient(135deg,#c4a47a,#b8975a)}
+.color-circle.cream{background:linear-gradient(135deg,#f5f0e8,#ede6dc)}
+.color-opt .name{font-size:14px;color:#3d3833}
+.color-opt .hex{font-size:12px;color:#b5aca3;margin-top:2px}
+
+/* 6. Specs */
+.specs{background:#faf8f5}
+.spec-table{width:100%;border-collapse:collapse}
+.spec-table tr{border-bottom:1px solid var(--border)}
+.spec-table td{padding:18px 24px;font-size:16px}
+.spec-table td:first-child{color:#b5aca3;width:140px;font-weight:300}
+.spec-table td:last-child{color:#3d3833;font-weight:400}
+
+/* 7. Dimension Diagram */
+.dimension{background:#f5f1eb;text-align:center}
+.dim-box{display:inline-block;position:relative;width:320px;height:340px;margin:0 auto}
+.dim-body{position:absolute;left:60px;top:40px;width:200px;height:260px;border:2px solid var(--text-dim);border-radius:8px;background:rgba(184,151,90,0.03)}
+.dim-drawer{position:absolute;left:70px;top:120px;width:180px;height:80px;border:1px dashed var(--text-light);border-radius:4px}
+.dim-drawer-label{position:absolute;left:80px;top:145px;font-size:13px;color:#b5aca3;letter-spacing:1px}
+.dim-w-line{position:absolute;left:60px;top:315px;width:200px;height:0;border-top:1px solid var(--text-dim)}
+.dim-w-left{position:absolute;left:55px;top:310px;width:1px;height:11px;background:var(--text-dim)}
+.dim-w-right{position:absolute;left:260px;top:310px;width:1px;height:11px;background:var(--text-dim)}
+.dim-w-text{position:absolute;left:120px;top:318px;font-size:14px;color:#3d3833;font-weight:400}
+.dim-h-line{position:absolute;left:30px;top:40px;width:0;height:260px;border-left:1px solid var(--text-dim)}
+.dim-h-top{position:absolute;left:25px;top:35px;width:11px;height:1px;background:var(--text-dim)}
+.dim-h-bottom{position:absolute;left:25px;top:300px;width:11px;height:1px;background:var(--text-dim)}
+.dim-h-text{position:absolute;left:10px;top:160px;font-size:14px;color:#3d3833;writing-mode:vertical-rl;letter-spacing:2px}
+.dim-depth{position:absolute;right:20px;top:140px;font-size:14px;color:#3d3833;writing-mode:vertical-rl;letter-spacing:2px}
+.dim-depth::before{content:'';position:absolute;right:-12px;top:0;height:260px;border-right:1px solid var(--text-light)}
+
+/* 8. Scenes */
+.scenes{background:#faf8f5}
+.scene-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.scene-item{border-radius:12px;overflow:hidden;position:relative;aspect-ratio:4/3}
+.scene-item img{width:100%;height:100%;object-fit:cover}
+.scene-item .overlay{position:absolute;bottom:0;left:0;right:0;padding:20px;background:linear-gradient(transparent,rgba(0,0,0,0.5));color:#fff;font-size:16px;letter-spacing:2px}
+.scene-full{grid-column:1/-1;aspect-ratio:16/7}
+
+/* 9. Service */
+.service{background:#f5f1eb}
+.service-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px}
+.service-card{background:#fff;border-radius:12px;padding:30px 20px;text-align:center;border:1px solid var(--border);box-shadow:var(--shadow)}
+.service-card .icon{width:50px;height:50px;margin:0 auto 14px;background:var(--gold-light);border-radius:50%;display:flex;align-items:center;justify-content:center}
+.service-card .icon svg{width:24px;height:24px;stroke:var(--gold);fill:none;stroke-width:1.5}
+.service-card h4{font-size:17px;font-weight:300;color:#3d3833;margin-bottom:6px}
+.service-card p{font-size:14px;color:#8a8078;line-height:1.6}
+
+/* 10. Footer */
+.footer{background:#faf8f5;padding:40px 50px 50px;text-align:center}
+.footer .brand{font-size:24px;font-weight:300;color:#3d3833;letter-spacing:6px;margin-bottom:10px}
+.footer .desc{font-size:14px;color:#b5aca3;letter-spacing:2px}
+
+        
+        /* ===== 手机适配 ===== */
+        @media (max-width: 600px) {
+            body { max-width: 100%; }
+            .sec { padding: 30px 16px; }
+            .sec-label { font-size: 11px; letter-spacing: 4px; }
+            .sec-title { font-size: 22px; letter-spacing: 2px; }
+            .sec-sub { font-size: 13px; letter-spacing: 1px; margin-bottom: 20px; }
+            
+            /* Hero */
+            .hero-overlay { left: 16px; right: 16px; }
+            .hero-overlay h1 { font-size: 26px; letter-spacing: 3px; }
+            .hero-overlay .brand { font-size: 11px; letter-spacing: 4px; }
+            .hero-overlay .price { font-size: 20px; }
+            
+            /* Philosophy */
+            .philosophy { flex-direction: column; gap: 20px; }
+            .philosophy .phil-text p { font-size: 15px; }
+            
+            /* Materials */
+            .material-grid { grid-template-columns: 1fr; gap: 20px; }
+            .mat-card .mat-name { font-size: 17px; }
+            .mat-card .mat-desc { font-size: 13px; }
+            
+            /* Craft */
+            .craft-row { flex-direction: column !important; gap: 12px; margin-bottom: 20px; }
+            .craft-row .craft-img { width: 100%; aspect-ratio: 16/10; }
+            .craft-row .craft-text { padding: 0; }
+            .craft-row .craft-text h4 { font-size: 18px; }
+            .craft-row .craft-text p { font-size: 14px; }
+            
+            /* Dimensions */
+            .dim-table td { padding: 12px 10px; font-size: 14px; }
+            .dim-table td:first-child { width: 90px; }
+            
+            /* Lifestyle */
+            .ls-grid { grid-template-columns: 1fr; }
+            .ls-card img { aspect-ratio: 16/10; }
+            
+            /* Service */
+            .service { padding: 30px 16px 40px; }
+            .service-items { flex-direction: column; gap: 12px; }
+            .svc-item { padding: 20px 16px; }
+            .svc-item .svc-title { font-size: 16px; }
+            .svc-item .svc-desc { font-size: 13px; }
+            .svc-note p { font-size: 13px; }
+            
+            /* Back button */
+            .back-btn { top: 12px; left: 12px; padding: 8px 14px; font-size: 13px; }
+        }
+
+</style>
+
+<style>
+.back-btn {
+    position: fixed; top: 20px; left: 20px; z-index: 9999;
+    background: rgba(255,255,255,0.9); border: none; border-radius: 24px;
+    padding: 10px 20px; font-size: 14px; color: #333; cursor: pointer;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.1); display: flex; align-items: center; gap: 6px;
+    transition: all 0.2s; backdrop-filter: blur(8px);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans SC", sans-serif;
+}
+.back-btn:hover { background: #fff; box-shadow: 0 4px 16px rgba(0,0,0,0.15); transform: translateY(-1px); }
+
+        /* ===== 手机适配 ===== */
+        @media (max-width: 520px) {
+            body { padding: 0; }
+            .hero { height: auto; min-height: 200px; padding: 40px 16px; }
+            .hero h1 { font-size: 20px; }
+            .hero p { font-size: 12px; }
+            section { padding: 24px 16px; }
+            h2 { font-size: 16px; margin-bottom: 12px; }
+            p, li { font-size: 13px; line-height: 1.7; }
+            .philosophy { grid-template-columns: 1fr; }
+            .mat-card { padding: 14px; }
+            .craft-row { flex-direction: column; }
+            .craft-row .craft-img { width: 100%; height: 180px; }
+            .dim-table td:first-child { width: 100px; font-size: 12px; }
+            .dim-table td:last-child { font-size: 12px; }
+            .ls-card { width: 48%; }
+            .svc-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+            .svc-item { padding: 14px 10px; }
+            .svc-item h4 { font-size: 13px; }
+            .svc-item p { font-size: 11px; }
+            .back-btn { top: 12px; left: 12px; padding: 8px 14px; font-size: 13px; }
+        }
+
+
+        /* ===== 手机适配 ===== */
+        @media (max-width: 600px) {
+            body { max-width: 100%; }
+            .sec { padding: 30px 16px; }
+            .sec-label { font-size: 11px; letter-spacing: 4px; }
+            .sec-title { font-size: 22px; letter-spacing: 2px; }
+            .sec-sub { font-size: 13px; letter-spacing: 1px; margin-bottom: 20px; }
+            
+            /* Hero */
+            .hero-overlay { left: 16px; right: 16px; }
+            .hero-overlay h1 { font-size: 26px; letter-spacing: 3px; }
+            .hero-overlay .brand { font-size: 11px; letter-spacing: 4px; }
+            .hero-overlay .price { font-size: 20px; }
+            
+            /* Philosophy */
+            .philosophy { flex-direction: column; gap: 20px; }
+            .philosophy .phil-text p { font-size: 15px; }
+            
+            /* Materials */
+            .material-grid { grid-template-columns: 1fr; gap: 20px; }
+            .mat-card .mat-name { font-size: 17px; }
+            .mat-card .mat-desc { font-size: 13px; }
+            
+            /* Craft */
+            .craft-row { flex-direction: column !important; gap: 12px; margin-bottom: 20px; }
+            .craft-row .craft-img { width: 100%; aspect-ratio: 16/10; }
+            .craft-row .craft-text { padding: 0; }
+            .craft-row .craft-text h4 { font-size: 18px; }
+            .craft-row .craft-text p { font-size: 14px; }
+            
+            /* Dimensions */
+            .dim-table td { padding: 12px 10px; font-size: 14px; }
+            .dim-table td:first-child { width: 90px; }
+            
+            /* Lifestyle */
+            .ls-grid { grid-template-columns: 1fr; }
+            .ls-card img { aspect-ratio: 16/10; }
+            
+            /* Service */
+            .service { padding: 30px 16px 40px; }
+            .service-items { flex-direction: column; gap: 12px; }
+            .svc-item { padding: 20px 16px; }
+            .svc-item .svc-title { font-size: 16px; }
+            .svc-item .svc-desc { font-size: 13px; }
+            .svc-note p { font-size: 13px; }
+            
+            /* Back button */
+            .back-btn { top: 12px; left: 12px; padding: 8px 14px; font-size: 13px; }
+        }
+
+</style>
+
+</head>
+<body>
+<a href="../index.html" class="back-btn" onclick="localStorage.setItem('scrollPos', history.state?.scrollPos || 0);">← 返回作品集</a>
+
+
+<!-- 1. Hero -->
+<section class="sec brand-hero">
+  <div class="logo-line">
+    <div class="diam"></div>
+    <span>静 · 物</span>
+    <div class="diam"></div>
+  </div>
+  <h1>云栖床头柜</h1>
+  <p class="tagline">以木为语  以简为美</p>
+  <div class="banner">
+    <img src="素材/scene_2.jpg" alt="云栖床头柜">
+  </div>
+  <div class="price">¥1,280 <span>起</span></div>
+</section>
+
+<!-- 2. Design Philosophy -->
+<section class="sec philosophy">
+  <div class="sec-label">
+    <div class="line"></div>
+    <span>设计理念</span>
+    <div class="line"></div>
+  </div>
+  <div class="sec-title">源于自然的宁静</div>
+  <div class="sec-subtitle">DESIGN PHILOSOPHY</div>
+  <div class="philo-quote">
+    <div class="big">真正的奢华，不在于<em>繁复的装饰</em>，<br>而在于材质本身的<em>质感</em>与工艺的<em>精雕细琢</em></div>
+    <div class="philo-divider"></div>
+    <p>云栖床头柜的设计灵感源自北欧极简主义与东方禅意美学的融合。每一个圆角、每一条纹理，都经过反复推敲，只为在卧室的静谧空间中，营造一份恰到好处的存在感。</p>
+  </div>
+  <div class="philo-features">
+    <div class="philo-feat"><div class="num">R15</div><div class="label">安全圆角 / mm</div></div>
+    <div class="philo-feat"><div class="num">50</div><div class="label">黄金宽度 / cm</div></div>
+    <div class="philo-feat"><div class="num">12</div><div class="label">轻盈自重 / kg</div></div>
+  </div>
+</section>
+
+<!-- 3. Materials — real photo crops from hero.jpg -->
+<section class="sec materials">
+  <div class="sec-label">
+    <div class="line"></div>
+    <span>甄选材质</span>
+    <div class="line"></div>
+  </div>
+  <div class="sec-title">每一种材质都有温度</div>
+  <div class="sec-subtitle">SELECTED MATERIALS</div>
+  <div class="material-grid">
+    <div class="material-card">
+      <div class="mat-photo crop-wood">
+        <img src="素材/hero.jpg" alt="白橡木纹理">
+      </div>
+      <div class="info">
+        <h4>白橡木框架</h4>
+        <p>精选北美FAS级白橡木，纹理清晰自然，木质坚硬耐久，历经时光愈显温润</p>
+      </div>
+    </div>
+    <div class="material-card">
+      <div class="mat-photo crop-paint">
+        <img src="素材/hero.jpg" alt="哑光烤漆">
+      </div>
+      <div class="info">
+        <h4>哑光烤漆</h4>
+        <p>五遍底漆三遍面漆，环保水性漆，触感细腻如丝，色泽温润内敛</p>
+      </div>
+    </div>
+    <div class="material-card">
+      <div class="mat-photo crop-rail">
+        <img src="素材/hero.jpg" alt="静音导轨">
+      </div>
+      <div class="info">
+        <h4>静音导轨</h4>
+        <p>德国Hettich三节静音导轨，抽拉顺滑无声，开合间尽显品质</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. Craftsmanship — real photo crops -->
+<section class="sec craftsmanship">
+  <div class="sec-label">
+    <div class="line"></div>
+    <span>匠心工艺</span>
+    <div class="line"></div>
+  </div>
+  <div class="sec-title">细节之处见真章</div>
+  <div class="sec-subtitle">CRAFTSMANSHIP</div>
+  
+  <div class="craft-list">
+    <div class="craft-item">
+      <div class="craft-photo crop-round">
+        <img src="素材/hero.jpg" alt="圆角工艺">
+      </div>
+      <div class="craft-text">
+        <h4>手工倒圆</h4>
+        <p>所有边角均经工匠手工打磨，R15mm圆角设计，触感温润，避免磕碰，呵护家人安全。每一处弧度都经过反复校准，确保手感一致。</p>
+        <span class="craft-tag">安全圆角 · 手工打磨</span>
+      </div>
+    </div>
+    
+    <div class="craft-item">
+      <div class="craft-photo crop-joint">
+        <img src="素材/scene_d.jpg" alt="榫卯结构">
+      </div>
+      <div class="craft-text">
+        <h4>传统榫卯</h4>
+        <p>框架采用传统榫卯工艺，不用一颗螺丝，结构稳固，传承东方木作智慧。木材之间的咬合精密无间，历经岁月依然牢固如初。</p>
+        <span class="craft-tag">无螺丝 · 传统工艺</span>
+      </div>
+    </div>
+    
+    <div class="craft-item">
+      <div class="craft-photo crop-finish">
+        <img src="素材/scene_d.jpg" alt="漆面工艺">
+      </div>
+      <div class="craft-text">
+        <h4>八遍漆面</h4>
+        <p>五遍底漆三遍面漆，每遍之间手工细磨，最终呈现如丝绸般细腻的哑光质感。环保水性漆，无异味，即买即用。</p>
+        <span class="craft-tag">环保水性 · 无异味</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. Color Options -->
+<section class="sec color-section">
+  <div class="sec-label">
+    <div class="line"></div>
+    <span>颜色选择</span>
+    <div class="line"></div>
+  </div>
+  <div class="sec-title">两种经典色系</div>
+  <div class="sec-subtitle">COLOR OPTIONS</div>
+  <div class="color-row">
+    <div class="color-opt">
+      <div class="color-circle natural active"></div>
+      <div class="name">原木色</div>
+      <div class="hex">#B8975A</div>
+    </div>
+    <div class="color-opt">
+      <div class="color-circle cream"></div>
+      <div class="name">奶白色</div>
+      <div class="hex">#F5F0E8</div>
+    </div>
+  </div>
+</section>
+
+<!-- 6. Specs -->
+<section class="sec specs">
+  <div class="sec-label">
+    <div class="line"></div>
+    <span>规格参数</span>
+    <div class="line"></div>
+  </div>
+  <div class="sec-title">尺寸与参数</div>
+  <div class="sec-subtitle">SPECIFICATIONS</div>
+  <table class="spec-table">
+    <tr><td>产品名称</td><td>云栖床头柜</td></tr>
+    <tr><td>材质</td><td>白橡木 + 环保水性漆</td></tr>
+    <tr><td>尺寸</td><td>宽50cm × 深40cm × 高55cm</td></tr>
+    <tr><td>抽屉</td><td>2层静音抽屉</td></tr>
+    <tr><td>承重</td><td>台面承重≥30kg</td></tr>
+    <tr><td>重量</td><td>约12kg</td></tr>
+    <tr><td>颜色</td><td>原木色 / 奶白色</td></tr>
+    <tr><td>产地</td><td>中国·赣州</td></tr>
+  </table>
+</section>
+
+<!-- 7. Dimension Diagram -->
+<section class="sec dimension">
+  <div class="sec-label">
+    <div class="line"></div>
+    <span>尺寸图示</span>
+    <div class="line"></div>
+  </div>
+  <div class="sec-title">精准尺寸</div>
+  <div class="sec-subtitle">DIMENSIONS</div>
+  <div class="dim-box">
+    <div class="dim-body"></div>
+    <div class="dim-drawer"></div>
+    <div class="dim-drawer-label">抽屉 ×2</div>
+    <div class="dim-w-line"></div>
+    <div class="dim-w-left"></div>
+    <div class="dim-w-right"></div>
+    <div class="dim-w-text">50cm</div>
+    <div class="dim-h-line"></div>
+    <div class="dim-h-top"></div>
+    <div class="dim-h-bottom"></div>
+    <div class="dim-h-text">55cm</div>
+    <div class="dim-depth">40cm</div>
+  </div>
+</section>
+
+<!-- 8. Scenes -->
+<section class="sec scenes">
+  <div class="sec-label">
+    <div class="line"></div>
+    <span>场景搭配</span>
+    <div class="line"></div>
+  </div>
+  <div class="sec-title">融入你的生活</div>
+  <div class="sec-subtitle">LIFESTYLE</div>
+  <div class="scene-grid">
+    <div class="scene-item scene-full">
+      <img src="素材/hero.jpg" alt="北欧简约卧室">
+      <div class="overlay">北欧简约卧室</div>
+    </div>
+    <div class="scene-item">
+      <img src="素材/scene_1.jpg" alt="现代都市卧室">
+      <div class="overlay">现代都市卧室</div>
+    </div>
+    <div class="scene-item">
+      <img src="素材/scene_d.jpg" alt="温馨小窝">
+      <div class="overlay">温馨小窝</div>
+    </div>
+  </div>
+</section>
+
+<!-- 9. Service -->
+<section class="sec service">
+  <div class="sec-label">
+    <div class="line"></div>
+    <span>无忧服务</span>
+    <div class="line"></div>
+  </div>
+  <div class="sec-title">买的放心 用的安心</div>
+  <div class="sec-subtitle">OUR SERVICE</div>
+  <div class="service-grid">
+    <div class="service-card">
+      <div class="icon">
+        <svg viewBox="0 0 24 24"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+      </div>
+      <h4>免费配送</h4>
+      <p>全国包邮，大件家具送货上门</p>
+    </div>
+    <div class="service-card">
+      <div class="icon">
+        <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+      </div>
+      <h4>365天质保</h4>
+      <p>整柜质保一年，非人为损坏免费维修</p>
+    </div>
+    <div class="service-card">
+      <div class="icon">
+        <svg viewBox="0 0 24 24"><path d="M23 6l-9.5 9.5-5-5L1 18"/><polyline points="17 6 23 6 23 12"/></svg>
+      </div>
+      <h4>终身养护</h4>
+      <p>提供终身木材养护指导服务</p>
+    </div>
+  </div>
+</section>
+
+<!-- 10. Footer -->
+<section class="footer">
+  <div class="brand">静 · 物</div>
+  <div class="desc">以木为语  以简为美  让生活回归宁静</div>
+</section>
+
+
+<script>
+// 确保浏览器历史里有作品页记录
+history.replaceState({from: 'detail'}, '', '');
+history.pushState({from: 'detail'}, '', '');
+
+// 监听返回事件
+window.addEventListener('popstate', function(e) {
+    window.location.href = '../index.html';
+});
+</script>
+
+</body>
+</html>
